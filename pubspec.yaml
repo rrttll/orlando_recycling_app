@@ -32,17 +32,19 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   http: ^0.13.3
+  firebase_auth: ^4.17.4
+  logging: ^1.1.0  # Added logging dependency
+  firebase_core: "^2.25.4"  # Added firebase_core dependency
+  image_picker: ^0.8.4+2  # Added image_picker dependency
+  firebase_storage: ^11.6.5  # Added firebase_storage dependency
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  test: any  # Added test dependency for unit testing
+  firebase_auth_mocks: any  # Added firebase_auth_mocks dependency for mocking FirebaseAuth in tests
   flutter_lints: ^2.0.0
+  mockito: ^5.0.0  # Added mockito dependency for mocking in tests
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

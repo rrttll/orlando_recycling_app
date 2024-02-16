@@ -1,7 +1,3 @@
-// This file defines the User class, which is a data model for user profiles in our app.
-// It includes fields for a username, full name, profile picture URL, recycling goals, badges earned, and recycling history.
-// Note: This is not the "information database" mentioned in our app features. The information database would be a separate 
-//component of our app, likely with its own data model and database table or collection.
 class User {
   final String username;
   final String fullName;
@@ -18,4 +14,28 @@ class User {
     required this.badgesEarned,
     required this.recyclingHistory,
   });
+
+  // Convert a User into a map
+  Map<String, dynamic> toMap() {
+    return {
+      'username': username,
+      'fullName': fullName,
+      'profilePictureUrl': profilePictureUrl,
+      'recyclingGoals': recyclingGoals,
+      'badgesEarned': badgesEarned,
+      'recyclingHistory': recyclingHistory,
+    };
+  }
+
+  // Create a User from a map
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      username: map['username'],
+      fullName: map['fullName'],
+      profilePictureUrl: map['profilePictureUrl'],
+      recyclingGoals: map['recyclingGoals'],
+      badgesEarned: List<String>.from(map['badgesEarned']),
+      recyclingHistory: List<String>.from(map['recyclingHistory']),
+    );
+  }
 }

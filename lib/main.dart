@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart'; // Add this line
 import 'information_database_screen.dart';
 import 'user.dart' as userlib; // Use an alias for user.dart
 import 'user_profile_screen.dart';
 
-void main() {
+void main() async { // Add async keyword
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(); // Initialize Firebase
   runApp(MyApp());
 }
 

@@ -6,12 +6,10 @@ class InformationDatabasePage extends StatefulWidget {
   const InformationDatabasePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: public_member_api_docs
-  _InformationDatabasePageState createState() => _InformationDatabasePageState();
+  InformationDatabasePageState createState() => InformationDatabasePageState();
 }
 
-// ignore: public_member_api_docs
-class _InformationDatabasePageState extends State<InformationDatabasePage> {
+class InformationDatabasePageState extends State<InformationDatabasePage> {
   List? data;
 
   @override
