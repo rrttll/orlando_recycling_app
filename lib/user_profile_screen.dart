@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
 import 'information_database_screen.dart';
-
-class User {
-  final String username;
-  final String fullName;
-  final String profilePictureUrl;
-  int recyclingGoals;
-  List<String> badgesEarned;
-  List<RecyclingHistory> recyclingHistory;
-
-  User({
-    required this.username,
-    required this.fullName,
-    this.profilePictureUrl = '',
-    this.recyclingGoals = 0,
-    this.badgesEarned = const [],
-    this.recyclingHistory = const [],
-  });
-}
+import 'user.dart'; // Import the User class from user.dart
 
 class RecyclingHistory {
   final DateTime date;
