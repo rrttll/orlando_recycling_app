@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "593936764053",
+    "project_id": "orlando-recycles",
+    "storage_bucket": "orlando-recycles.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:593936764053:android:dacddcb4506b8e912b1f9c",
+        "android_client_info": {
+          "package_name": "com.example.recycling_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbewvOEIMDXO6teZZYC0aFIYm-Jc4hb-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:recycling_app/services/api_service.dart';
 
-class RecyclableItem {
-  final String name;
-  final String recyclingInstructions;
+class InformationDatabaseScreen extends StatefulWidget {
+  const InformationDatabaseScreen({Key? key}) : super(key: key);
 
-  const RecyclableItem({
-    required this.name,
-    required this.recyclingInstructions,
-  });
+  @override
+  InformationDatabaseScreenState createState() => InformationDatabaseScreenState();
 }
 
-class InformationDatabaseScreen extends StatelessWidget {
-  final List<RecyclableItem> items = const [
-    RecyclableItem(name: 'Paper', recyclingInstructions: 'Put in the blue bin'),
-    RecyclableItem(name: 'Plastic', recyclingInstructions: 'Put in the yellow bin'),
-    // Add more items here
-  ];
+class InformationDatabaseScreenState extends State<InformationDatabaseScreen> {
+  late Future<List> futureItems;
+  final ApiService apiService = ApiService(); // Create an instance of ApiService
 
-  const InformationDatabaseScreen({Key? key}) : super(key: key);
+  @override
+  void initState() {
+    super.initState();
+    futureItems = apiService.getItems(); // Call getItems() on the ApiService instance
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +24,25 @@ class InformationDatabaseScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Information Database'),
       ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(items[index].name),
-            subtitle: Text(items[index].recyclingInstructions),
-          );
+      body: FutureBuilder<List>(
+        future: futureItems,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(snapshot.data![index]['name']),
+                  subtitle: Text(snapshot.data![index]['recyclingInstructions']),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
         },
       ),
     );

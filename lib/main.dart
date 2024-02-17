@@ -1,17 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Add this line
+import 'package:firebase_core/firebase_core.dart';
 import 'information_database_screen.dart';
-import 'user.dart' as userlib; // Use an alias for user.dart
+import 'user.dart' as userlib;
 import 'user_profile_screen.dart';
+import 'services/api_service.dart'; // Import ApiService
 
-void main() async { // Add async keyword
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(); // Initialize Firebase
+  await Firebase.initializeApp();
+
+  // Create an instance of ApiService
+  var apiService = ApiService();
+
+  // Test getItems method
+  var items = await apiService.getItems();
+  print('getItems result: $items');
+
+  // Test getItem method with valid ids
+  for (var i = 1; i <= 11; i++) {
+    var item = await apiService.getItem(i.toString());
+    print('getItem result for id $i: $item');
+  }
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // Remove the 'const' keyword from the constructor
   MyApp({Key? key}) : super(key: key);
 
   // Create a User object using the alias
