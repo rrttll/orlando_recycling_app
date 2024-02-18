@@ -15,8 +15,9 @@ class AuthService {
       );
       return userCredential;
     } on FirebaseAuthException catch (e) {
-      // Log error using logging framework
-      _logger.severe('Failed to sign in with email and password: ${e.message}');
+      // Log error
+      _logger.severe('Failed to sign in with email and password: ${e.message}'); // Replace print with logger.severe
+
       rethrow;
     }
   }
