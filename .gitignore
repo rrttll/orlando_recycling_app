@@ -42,3 +42,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 .dart_tool/
+build/
+*.lock
+**/ios/Flutter/.last_build_id
+**/Flutter/ephemeral/
+*.xcworkspace/
+*.xcodeproj/
