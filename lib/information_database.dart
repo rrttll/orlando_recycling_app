@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class InformationDatabasePage extends StatefulWidget {
-  const InformationDatabasePage({Key? key}) : super(key: key);
+  const InformationDatabasePage({Key? key}) : super(key: key);  // Key is correctly passed to super
 
   @override
   InformationDatabasePageState createState() => InformationDatabasePageState();

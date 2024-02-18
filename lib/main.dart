@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:logging/logging.dart';
 import 'information_database_screen.dart';
 import 'user.dart' as userlib;
 import 'user_profile_screen.dart';
 import 'services/api_service.dart'; // Import ApiService
+
+final _logger = Logger('main.dart');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,12 +17,12 @@ void main() async {
 
   // Test getItems method
   var items = await apiService.getItems();
-  print('getItems result: $items');
+  _logger.info('getItems result: $items');
 
   // Test getItem method with valid ids
   for (var i = 1; i <= 11; i++) {
     var item = await apiService.getItem(i.toString());
-    print('getItem result for id $i: $item');
+    _logger.info('getItem result for id $i: $item');
   }
 
   runApp(MyApp());
