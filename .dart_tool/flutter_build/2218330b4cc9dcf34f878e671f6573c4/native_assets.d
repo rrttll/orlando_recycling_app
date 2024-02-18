@@ -1,1 +1,0 @@
- C:\\Users\\RTLMedia\\ValenciaProjects\\new_recycling_app\\.dart_tool\\flutter_build\\2218330b4cc9dcf34f878e671f6573c4\\native_assets.yaml: 
