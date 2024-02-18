@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:logging/logging.dart'; // Import logging
 import 'information_database_screen.dart';
 import 'user.dart' as userlib;
@@ -8,7 +8,7 @@ import 'services/api_service.dart'; // Import ApiService
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
 
   // Create an instance of ApiService
   var apiService = ApiService();
