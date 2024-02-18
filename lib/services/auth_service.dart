@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logging/logging.dart'; // Import logging
 
 class AuthService {
   final FirebaseAuth _auth;
+  final Logger _logger = Logger('AuthService'); // Create a logger instance
 
   AuthService({required FirebaseAuth auth}) : _auth = auth;
 
@@ -14,7 +16,7 @@ class AuthService {
       return userCredential;
     } on FirebaseAuthException catch (e) {
       // Log error
-      print('Failed to sign in with email and password: ${e.message}');
+      _logger.severe('Failed to sign in with email and password: ${e.message}'); // Replace print with logger.severe
       rethrow;
     }
   }
