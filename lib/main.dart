@@ -99,6 +99,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class LoginScreen extends StatelessWidget {
+  final TextEditingController usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,13 +109,14 @@ class LoginScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           TextField(
+            controller: usernameController,
             decoration: InputDecoration(
               labelText: 'Username',
               filled: true,
               isDense: true,
             ),
           ),
-          SizedBox(height: 12), // Gives a bit of space between the fields
+          SizedBox(height: 12),
           TextField(
             decoration: InputDecoration(
               labelText: 'Password',
@@ -122,12 +125,27 @@ class LoginScreen extends StatelessWidget {
             ),
             obscureText: true,
           ),
-          SizedBox(height: 20), // Gives a bit of space between the fields and the button
+          SizedBox(height: 20),
           TextButton(
             onPressed: () {
-              // TODO: Implement "Forgot Password" functionality
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RecoverPasswordScreen()),
+              );
             },
             child: Text('Forgot Password'),
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              if (usernameController.text.isNotEmpty) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => BarcodeScannerScreen()),
+                );
+              }
+            },
+            child: Text('Login'),
           ),
         ],
       ),
