@@ -1,8 +1,10 @@
+// File: /lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  // Updated constructor with super parameter syntax
+  const LoginScreen({super.key});
 
   @override
   LoginScreenState createState() => LoginScreenState();

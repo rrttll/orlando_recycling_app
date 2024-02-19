@@ -1,60 +1,56 @@
+ // File: /lib/main.dart
 import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:logging/logging.dart'; // Import logging
-import 'information_database_screen.dart';
-import 'user.dart' as userlib;
-import 'user_profile_screen.dart';
-import 'services/api_service.dart'; // Import ApiService
+import 'screens/information_database_screen.dart';
+import 'user.dart' as userlib; // Assuming 'user.dart' is directly under 'lib/'
+import 'screens/user_profile_screen.dart';
+import 'services/api_service.dart'; // Assuming 'api_service.dart' is under 'lib/services/'
 
 final _logger = Logger('main.dart');
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // If Firebase is used, uncomment the following lines:
   // await Firebase.initializeApp();
 
-  // Create an instance of ApiService
   var apiService = ApiService();
-
-  // Create a logger instance
   final logger = Logger('main');
 
-  // Test getItems method
+  // Example API calls - ensure your ApiService and these methods are correctly implemented
   var items = await apiService.getItems();
-  logger.info('getItems result: $items'); // Replace print with logger.info
+  logger.info('getItems result: $items');
 
-  // Test getItem method with valid ids
   for (var i = 1; i <= 11; i++) {
     var item = await apiService.getItem(i.toString());
     _logger.info('getItem result for id $i: $item');
-
   }
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  // Create a User object using the alias
-  final user = userlib.User(
-    username: 'username', // Replace with actual username
-    fullName: 'Full Name', // Replace with actual full name
-    profilePictureUrl: 'url', // Replace with actual profile picture URL
-    recyclingGoals: 0, // Replace with actual recycling goals
-    badgesEarned: [], // Replace with actual list of badges earned
-    recyclingHistory: [], // Replace with actual recycling history
-  );
+  const MyApp({super.key}); // Updated to use modern Dart syntax with super parameters.
 
   @override
   Widget build(BuildContext context) {
+    // Temporarily creating a User object here for demonstration. Adjust as necessary.
+    final user = userlib.User(
+      username: 'username', 
+      fullName: 'Full Name', 
+      profilePictureUrl: 'url',
+      recyclingGoals: 0,
+      badgesEarned: [],
+      recyclingHistory: [],
+    );
+
     return MaterialApp(
       title: 'Recycling App',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      initialRoute: '/', // This is the route that is loaded first when the application starts.
+      initialRoute: '/',
       routes: {
-        '/': (context) => UserProfileScreen(user: user), // Pass the User object to UserProfileScreen
+        '/': (context) => UserProfileScreen(user: user),
         '/information_database': (context) => const InformationDatabaseScreen(),
       },
     );

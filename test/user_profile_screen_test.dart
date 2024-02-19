@@ -1,8 +1,10 @@
+// File: /test/user_profile_screen_test.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recycling_app/user_profile_screen.dart';
-import 'package:recycling_app/information_database_screen.dart';
-import 'package:recycling_app/user.dart'; // Import the User class from user.dart
+// Update these import paths according to the new file locations
+import 'package:recycling_app/screens/user_profile_screen.dart';
+import 'package:recycling_app/screens/information_database_screen.dart';
+import 'package:recycling_app/user.dart'; // Assuming 'user.dart' is directly under 'lib/'
 
 void main() {
   testWidgets('navigate to InformationDatabaseScreen', (WidgetTester tester) async {
@@ -12,9 +14,9 @@ void main() {
         username: 'test', 
         fullName: 'Test User',
         profilePictureUrl: 'http://example.com/profile.jpg', // Use a placeholder URL
-        recyclingGoals: 0, // Add this
-        badgesEarned: [], // Add this
-        recyclingHistory: [], // Add this
+        recyclingGoals: 0, // Assuming these fields exist in your User class
+        badgesEarned: [], // Assuming these fields exist in your User class
+        recyclingHistory: [], // Assuming these fields exist in your User class
       )),
     ));
 

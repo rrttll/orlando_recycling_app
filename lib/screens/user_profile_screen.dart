@@ -1,6 +1,7 @@
+// File: /lib/screens/user_profile_screen.dart
 import 'package:flutter/material.dart';
 import 'information_database_screen.dart';
-import 'user.dart'; // Import the User class from user.dart
+import '../user.dart'; // Import the User class from user.dart
 
 class RecyclingHistory {
   final DateTime date;
@@ -15,7 +16,8 @@ class RecyclingHistory {
 class UserProfileScreen extends StatelessWidget {
   final User user;
 
-  const UserProfileScreen({Key? key, required this.user}) : super(key: key);
+  // Updated constructor with super parameter syntax
+  const UserProfileScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {

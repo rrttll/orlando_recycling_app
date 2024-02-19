@@ -1,9 +1,11 @@
+// File: /lib/information_database.dart
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class InformationDatabasePage extends StatefulWidget {
-  const InformationDatabasePage({Key? key}) : super(key: key);  // Key is correctly passed to super
+  // Updated constructor with super parameter syntax
+  const InformationDatabasePage({super.key});
 
   @override
   InformationDatabasePageState createState() => InformationDatabasePageState();
@@ -22,12 +24,10 @@ class InformationDatabasePageState extends State<InformationDatabasePage> {
     final response = await http.get(Uri.parse('https://curry-home.cheetoh-python.ts.net/api/v1/items'));
 
     if (response.statusCode == 200) {
-      // If the server returns a 200 OK response, parse the JSON.
       setState(() {
         data = jsonDecode(response.body);
       });
     } else {
-      // If the server did not return a 200 OK response, throw an exception.
       throw Exception('Failed to load data');
     }
   }

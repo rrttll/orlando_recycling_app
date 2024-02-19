@@ -1,14 +1,17 @@
+// File: /new_recycling_app/android/build.gradle
 buildscript {
-    ext.kotlin_version = '1.5.31' // Corrected Kotlin version
+    ext.kotlin_version = '1.6.10' // Corrected Kotlin version
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.3'
+        classpath 'com.android.tools.build:gradle:7.3.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.10'
+        // Add this line to include the Gradle Dependency Management Plugin
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
     }
 }
 
@@ -17,15 +20,19 @@ allprojects {
         google()
         mavenCentral()
     }
+
+    // Apply the plugin to all projects
+    apply plugin: "io.spring.dependency-management"
 }
 
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
-subprojects {
-    project.evaluationDependsOn(':app')
-}
+// Comment out the following line
+// subprojects {
+//     project.evaluationDependsOn(':app')
+// }
 
 tasks.register("clean", Delete) {
     delete rootProject.buildDir

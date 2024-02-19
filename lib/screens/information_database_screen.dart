@@ -1,8 +1,10 @@
+// File: /lib/screens/information_database_screen.dart
 import 'package:flutter/material.dart';
 import 'package:recycling_app/services/api_service.dart';
 
 class InformationDatabaseScreen extends StatefulWidget {
-  const InformationDatabaseScreen({Key? key}) : super(key: key);
+  // Updated constructor with super parameter syntax
+  const InformationDatabaseScreen({super.key});
 
   @override
   InformationDatabaseScreenState createState() => InformationDatabaseScreenState();

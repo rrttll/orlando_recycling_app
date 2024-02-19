@@ -1,3 +1,4 @@
+# File: /new_recycling_app/pubspec.yaml
 name: recycling_app
 description: "A new Flutter project."
 
@@ -12,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  http: ^0.13.0
+  http: ^1.2.0
   firebase_auth: ^4.17.4
   logging: ^1.1.0  # Added logging dependency
   firebase_core: "^2.25.4"  # Added firebase_core dependency
@@ -23,10 +24,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   test: ^1.24.0
   mockito: ^5.0.0
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
