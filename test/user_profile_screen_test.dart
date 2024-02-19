@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:recycling_app/user_profile_screen.dart';
-import 'package:recycling_app/information_database_screen.dart';
-import 'package:recycling_app/user.dart'; // Import the User class from user.dart
+import 'package:orlando_recycling_app/user_profile_screen.dart';
+import 'package:orlando_recycling_app/information_database_screen.dart';
+import 'package:orlando_recycling_app/user.dart';
 
 void main() {
   testWidgets('navigate to InformationDatabaseScreen', (WidgetTester tester) async {

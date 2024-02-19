@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:recycling_app/services/auth_service.dart';
+import 'package:orlando_recycling_app/services/auth_service.dart';
 
 class MockUserCredential extends Mock implements UserCredential {}
 

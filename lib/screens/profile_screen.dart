@@ -79,6 +79,7 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildBody(User? user) {
     if (_isLoading) {
+      // ignore: prefer_const_constructors
       return Center(child: const CircularProgressIndicator());
     }
 

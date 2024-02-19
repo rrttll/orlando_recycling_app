@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recycling_app/services/api_service.dart';
+import 'package:orlando_recycling_app/services/api_service.dart'; // Add this line
 
 class InformationDatabaseScreen extends StatefulWidget {
   const InformationDatabaseScreen({Key? key}) : super(key: key);
@@ -9,13 +9,13 @@ class InformationDatabaseScreen extends StatefulWidget {
 }
 
 class InformationDatabaseScreenState extends State<InformationDatabaseScreen> {
-  late Future<List> futureItems;
+  late Future<List<dynamic>> futureItems;
   final ApiService apiService = ApiService(); // Create an instance of ApiService
 
   @override
   void initState() {
     super.initState();
-    futureItems = apiService.getItems(); // Call getItems() on the ApiService instance
+    futureItems = apiService.getItems(); // Call getItems() on the ApiService instance without any arguments
   }
 
   @override
@@ -24,7 +24,7 @@ class InformationDatabaseScreenState extends State<InformationDatabaseScreen> {
       appBar: AppBar(
         title: const Text('Information Database'),
       ),
-      body: FutureBuilder<List>(
+      body: FutureBuilder<List<dynamic>>(
         future: futureItems,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

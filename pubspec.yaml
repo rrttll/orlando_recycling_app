@@ -1,4 +1,4 @@
-name: recycling_app
+name: orlando_recycling_app
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -37,6 +37,7 @@ dependencies:
   firebase_core: "^2.25.4"  # Added firebase_core dependency
   image_picker: ^0.8.4+2  # Added image_picker dependency
   firebase_storage: ^11.6.5  # Added firebase_storage dependency
+  dio: ^4.0.0  # Added dio dependency
 
 dev_dependencies:
   flutter_test:
