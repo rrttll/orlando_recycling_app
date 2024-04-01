@@ -1,4 +1,3 @@
-//File: lib/screens/recover_password_screen.dart
 import 'package:flutter/material.dart';
 
 class RecoverPasswordScreen extends StatelessWidget {
