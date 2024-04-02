@@ -1,58 +1,51 @@
 // File: lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
-import 'recover_password_screen.dart';
+import 'user_profile_screen.dart'; // Ensure correct import path
 
-class LoginScreen extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-  final VoidCallback onLogin;
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
 
-  LoginScreen({required this.onLogin});
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _handleLogin() {
+  // Here you should implement the logic for verifying the credentials
+  // For simplicity, I'm assuming the credentials are correct
+  final username = _usernameController.text;
+  final password = _passwordController.text;
+
+  if (username.isNotEmpty && password.isNotEmpty) {
+    // If login is successful, pop with a result to update the login state
+    Navigator.of(context).pop(true);
+  } else {
+    // Show error or do nothing if login fails
+  }
+}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Login")),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-                filled: true,
-                isDense: true,
-              ),
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextFormField(
+              controller: _usernameController,
+              decoration: InputDecoration(labelText: 'Username'),
             ),
-            SizedBox(height: 12),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Password',
-                filled: true,
-                isDense: true,
-              ),
+            TextFormField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),
               obscureText: true,
             ),
-            SizedBox(height: 20),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RecoverPasswordScreen()),
-                );
-              },
-              child: Text('Forgot Password'),
-            ),
-            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                if (usernameController.text.isNotEmpty) {
-                  onLogin();
-                }
-              },
-              child: Text('Login'),
+              onPressed: _handleLogin,
+              child: Text("Login"),
             ),
           ],
         ),

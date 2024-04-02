@@ -5,9 +5,8 @@ import 'screens/user_profile_screen.dart';
 import 'screens/barcode_scanner_screen.dart';
 import 'screens/community_feature_screen.dart';
 import 'screens/educational_screen.dart';
-import 'screens/recover_password_screen.dart';
 import 'screens/map_schedule_screen.dart';
-import 'screens/resource_details_screen.dart';
+//import 'screens/resource_details_screen.dart';
 import 'screens/settings_screen.dart';
 
 void main() => runApp(MyApp());
@@ -17,6 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Orlando Recycles',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: HomeScreen(),
     );
   }
@@ -32,24 +34,33 @@ class _HomeScreenState extends State<HomeScreen> {
   bool _isLoggedIn = false;
 
   void _onItemTapped(int index) {
-    if (_isLoggedIn && index == 0) {
-      _logout();
-    } else if (_isLoggedIn || index == 0) {
+    if (index == 0) {
+      if (_isLoggedIn) {
+        _logout();
+      } else {
+        _login();
+      }
+    } else {
       setState(() {
         _selectedIndex = index;
       });
-    } else {
-      // Optionally, handle attempts to navigate while logged out
-      // e.g., showing a dialog that login is required
     }
   }
 
-  void _login() {
-    setState(() {
-      _isLoggedIn = true;
-      _selectedIndex =
-          1; // Optionally navigate to a different screen upon login
-    });
+  Future<void> _login() async {
+    // Navigate to the LoginScreen and await the result
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+    );
+
+    // If the result is true, set the state to logged in
+    if (result == true) {
+      setState(() {
+        _isLoggedIn = true;
+        _selectedIndex = 1; // Assuming the profile is at index 1
+      });
+    }
   }
 
   void _logout() {
@@ -61,14 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> _widgetOptions = [
-      LoginScreen(onLogin: _login),
+    final _widgetOptions = <Widget>[
+      LoginScreen(),
       UserProfileScreen(),
       BarcodeScannerScreen(),
       CommunityFeatureScreen(),
       EducationalScreen(),
       MapScheduleScreen(),
-      ResourceDetailsScreen(),
+     // ResourceDetailsScreen(),
       SettingsScreen(),
     ];
 
@@ -78,10 +89,10 @@ class _HomeScreenState extends State<HomeScreen> {
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.blue,
-        items: [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(_isLoggedIn ? Icons.exit_to_app : Icons.login),
-            label: _isLoggedIn ? 'Logout' : 'Login',
+            icon: Icon(Icons.login),
+            label: 'Login',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -103,10 +114,10 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.map),
             label: 'Map & Pickups',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.details),
-            label: 'Resources',
-          ),
+          //BottomNavigationBarItem(
+           // icon: Icon(Icons.details),
+          //  label: 'Resources',
+         // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
