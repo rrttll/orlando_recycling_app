@@ -12,7 +12,7 @@ import 'screens/settings_screen.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
- @override
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Orlando Recycles',
@@ -130,7 +130,8 @@ class LoginScreen extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RecoverPasswordScreen()),
+                MaterialPageRoute(
+                    builder: (context) => RecoverPasswordScreen()),
               );
             },
             child: Text('Forgot Password'),
@@ -141,7 +142,8 @@ class LoginScreen extends StatelessWidget {
               if (usernameController.text.isNotEmpty) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => BarcodeScannerScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => BarcodeScannerScreen()),
                 );
               }
             },

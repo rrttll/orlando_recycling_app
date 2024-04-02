@@ -6,7 +6,7 @@ class CommunityFeatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Community Feature")),
-      body: Center(child: Text("This is the Community Feature Screen")),
+      body: Center(child: Text("This is the Community Screen")),
     );
   }
 }
