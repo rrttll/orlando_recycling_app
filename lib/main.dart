@@ -1,5 +1,6 @@
 // File: lib/main.dart
 import 'package:flutter/material.dart';
+import 'screens/login_screen.dart';
 import 'screens/user_profile_screen.dart';
 import 'screens/barcode_scanner_screen.dart';
 import 'screens/community_feature_screen.dart';
@@ -28,42 +29,66 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
-  final List<Widget> _widgetOptions = [
-    Scaffold(body: LoginScreen()),
-    Scaffold(body: UserProfileScreen()),
-    Scaffold(body: BarcodeScannerScreen()),
-    Scaffold(body: CommunityFeatureScreen()),
-    Scaffold(body: EducationalScreen()),
-    Scaffold(body: RecoverPasswordScreen()),
-    Scaffold(body: MapScheduleScreen()),
-    Scaffold(body: ResourceDetailsScreen()),
-    Scaffold(body: SettingsScreen()),
-  ];
+  bool _isLoggedIn = false;
 
   void _onItemTapped(int index) {
+    if (_isLoggedIn && index == 0) {
+      _logout();
+    } else if (_isLoggedIn || index == 0) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    } else {
+      // Optionally, handle attempts to navigate while logged out
+      // e.g., showing a dialog that login is required
+    }
+  }
+
+  void _login() {
     setState(() {
-      _selectedIndex = index;
+      _isLoggedIn = true;
+      _selectedIndex =
+          1; // Optionally navigate to a different screen upon login
+    });
+  }
+
+  void _logout() {
+    setState(() {
+      _isLoggedIn = false;
+      _selectedIndex = 0; // Navigate back to the LoginScreen.
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _widgetOptions = [
+      LoginScreen(onLogin: _login),
+      UserProfileScreen(),
+      BarcodeScannerScreen(),
+      CommunityFeatureScreen(),
+      EducationalScreen(),
+      MapScheduleScreen(),
+      ResourceDetailsScreen(),
+      SettingsScreen(),
+    ];
+
     return Scaffold(
-      body: _widgetOptions.elementAt(_selectedIndex),
+      body: IndexedStack(index: _selectedIndex, children: _widgetOptions),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         unselectedItemColor: Colors.grey,
         selectedItemColor: Colors.blue,
-        items: <BottomNavigationBarItem>[
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.login),
-            label: 'Login',
+            icon: Icon(_isLoggedIn ? Icons.exit_to_app : Icons.login),
+            label: _isLoggedIn ? 'Logout' : 'Login',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
+            icon: Icon(Icons.camera_alt),
             label: 'Barcode',
           ),
           BottomNavigationBarItem(
@@ -75,16 +100,12 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Education',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.lock_open),
-            label: 'Recover Password',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.map),
-            label: 'Map Schedule',
+            label: 'Map & Pickups',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.details),
-            label: 'Resource Details',
+            label: 'Resources',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -93,63 +114,6 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class LoginScreen extends StatelessWidget {
-  final TextEditingController usernameController = TextEditingController();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          TextField(
-            controller: usernameController,
-            decoration: InputDecoration(
-              labelText: 'Username',
-              filled: true,
-              isDense: true,
-            ),
-          ),
-          SizedBox(height: 12),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Password',
-              filled: true,
-              isDense: true,
-            ),
-            obscureText: true,
-          ),
-          SizedBox(height: 20),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => RecoverPasswordScreen()),
-              );
-            },
-            child: Text('Forgot Password'),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              if (usernameController.text.isNotEmpty) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BarcodeScannerScreen()),
-                );
-              }
-            },
-            child: Text('Login'),
-          ),
-        ],
       ),
     );
   }
