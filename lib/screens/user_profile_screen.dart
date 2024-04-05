@@ -1,126 +1,95 @@
+// File: lib/screens/login_screen.dart
 import 'package:flutter/material.dart';
-import 'edit_profile_screen.dart';
-import 'logout_confirmation_screen.dart';
-import 'settings_screen.dart'; // Ensure this is correctly pointing to your SettingsScreen
 
-class UserProfileScreen extends StatelessWidget {
+class UserProfileScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return ProfileScreen();
-  }
+  _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
-class ProfileScreen extends StatelessWidget {
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  String _username = 'Jane Daniels';
+  int _totalRecycled = 220; // This is in pounds
+
+  final int _totalBadges = 6; // Total badges for illustration
+  final int _nextBadgeThreshold =
+      100; // Threshold in pounds for earning the next badge
+
+  // Calculate the number of badges earned
+  int get _badgesEarned => _totalRecycled ~/ _nextBadgeThreshold;
+
+  // Calculate pounds remaining to earn the next badge
+  int get _poundsToNextBadge =>
+      _nextBadgeThreshold - (_totalRecycled % _nextBadgeThreshold);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => SettingsScreen())),
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(16.0),
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
+                radius: 50.0,
+                backgroundImage: AssetImage('assets/profile_picture.png'),
+              ),
+              SizedBox(width: 10.0),
+              Expanded(
+                child: Text(
+                  _username,
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20.0),
+          Text(
+            'Recycling Achievements',
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+          Text('Total waste recycled: $_totalRecycled lbs'),
+          Text('$_badgesEarned earned out of $_totalBadges 🌟'),
+          Text('$_poundsToNextBadge lbs to next badge'),
+          SizedBox(height: 10.0),
+          Text('Every 5 badges plants a tree 🌳'),
+          SizedBox(height: 20.0),
+          Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed:
+                      () {}, // Placeholder for edit profile functionality
+                  child: Text('Edit Profile'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.primary),
+                    foregroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.onPrimary),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10), // Adding some space between the buttons
+              Expanded(
+                child: ElevatedButton(
+                  onPressed:
+                      () {}, // Placeholder for save profile functionality
+                  child: Text('Save Profile'),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.primary),
+                    foregroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.onPrimary),
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
-      ),
-      body: ProfilePage(),
-    );
-  }
-}
-
-class ProfilePage extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  String _username = 'Jane Doe';
-  int _totalRecycled = 150; // Total recycled material in kg
-  int _nextBadgeThreshold = 200; // Next badge at 200kg
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(16.0),
-      children: [
-        profileHeader(),
-        SizedBox(height: 20),
-        recyclingData(),
-        SizedBox(height: 20),
-        progressionBadges(),
-        SizedBox(height: 20),
-        button('Edit Profile', Colors.purple, () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (_) => EditProfileScreen()));
-        }),
-        SizedBox(height: 20),
-        button('Logout', Colors.red, () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => LogoutConfirmationScreen()));
-        }),
-      ],
-    );
-  }
-
-  Widget profileHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        CircleAvatar(
-          radius: 50,
-          backgroundImage: AssetImage('assets/profile_picture.png'),
-        ),
-        Text(
-          _username,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-      ],
-    );
-  }
-
-  Widget recyclingData() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Recycling Data',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        Text('Total waste recycled: $_totalRecycled kg'),
-        Text('Next badge at: $_nextBadgeThreshold kg'),
-      ],
-    );
-  }
-
-  Widget progressionBadges() {
-    return ExpansionTile(
-      title: Text('Progression Badges'),
-      children: [
-        Wrap(
-          spacing: 8,
-          children: List.generate(
-              5,
-              (index) => Icon(Icons.star,
-                  color: index < _totalRecycled / 50
-                      ? Colors.amber
-                      : Colors.grey)),
-        ),
-      ],
-    );
-  }
-
-  Widget button(String text, Color color, VoidCallback onPressed) {
-    return Container(
-      width: double
-          .infinity, // This will make the button stretch to the full width of its parent container
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color, // Background color
-          foregroundColor: Colors.white, // Text color
-        ),
-        child: Text(text),
       ),
     );
   }
