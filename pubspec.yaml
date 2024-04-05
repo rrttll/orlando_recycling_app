@@ -55,6 +55,13 @@ dev_dependencies:
 flutter:
   assets:
     - assets/profile_picture.png
+    - assets/orlando_recycling_logo.jpg
+    - assets/chat_background.jpg
+    - assets/recycling_cans.png
+    - assets/recycling_initiatives.jpg
+    - assets/sustainable_living.jpg
+    - assets/think_green.jpg
+    - assets/Captain_Orlando_Recycling_Mission.mp4
   
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
