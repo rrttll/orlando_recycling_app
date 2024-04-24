@@ -1,4 +1,4 @@
-// File: lib/screens/login_screen.dart
+// File: lib/screens/user_profile_screen.dart
 import 'package:flutter/material.dart';
 
 class UserProfileScreen extends StatefulWidget {

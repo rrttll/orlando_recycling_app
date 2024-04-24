@@ -1,5 +1,7 @@
-// File: lib/main.dart
+//File: /main.dart
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/theme_provider.dart';
 import 'screens/login_screen.dart';
 import 'screens/user_profile_screen.dart';
 import 'screens/barcode_scanner_screen.dart';
@@ -9,13 +11,19 @@ import 'screens/map_schedule_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/recover_password_screen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+  ChangeNotifierProvider(
+    create: (context) => ThemeProvider(),
+    child: MyApp(),
+  ),
+);
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Orlando Recycles',
+      theme: Provider.of<ThemeProvider>(context).isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: HomeScreen(),
     );
   }

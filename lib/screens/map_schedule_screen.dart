@@ -1,3 +1,4 @@
+//File: lib/screens/map_schedule_screen.dart
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
